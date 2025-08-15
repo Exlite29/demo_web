@@ -5,8 +5,8 @@ import styles from '../../app/logo.module.css';
 const LogoSection = () => {
     const logos = [
         { src: 'https://img1.wsimg.com/isteam/ip/94db7874-336d-4817-aee0-64bbe73e984c/BIG%20CIRCLE%202.png/:/rs=w:288,h:288,cg:true,m/cr=w:288,h:288/qt=q:95', alt: 'Logo 1', width: 150, height: 50 },
-        { src: 'https://toppng.com/uploads/preview/equal-housing-opportunity-logo-vector-11574200813xxobzv0wqt.png', alt: 'Logo 2', width: 150, height: 50 },
-        { src: 'https://i.pinimg.com/736x/42/7c/57/427c574340dd9a9cf8339f5f5f6d4707.jpg', alt: 'Logo 3', width: 150, height: 50 },
+        { src: 'https://www.nar.realtor/_next/image?url=https%3A%2F%2Fcms.nar.realtor%2F%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fwysiwyg_small%2Fpublic%2Fdownloadable%2Fequal-housing-opportunity-logo-1200w.jpg%3Fitok%3DPR2g_i-2&w=640&q=75&dpl=dpl_24PhiwfCcRkWsBDnxR3Yc9DXyg7B', alt: 'Logo 2', width: 150, height: 50 },
+        { src: 'https://logosandtypes.com/wp-content/uploads/2020/08/realtor.svg', alt: 'Logo 3', width: 150, height: 50 },
         { src: 'https://ww1.prweb.com/prfiles/2016/08/12/13614323/PVCC-Logo-Transp%20copy.png?p=publish', alt: 'Logo 4', width: 150, height: 50 },
     ];
 

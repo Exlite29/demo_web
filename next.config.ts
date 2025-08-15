@@ -13,13 +13,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "toppng.com",
+        hostname: "www.nar.realtor",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "i.pinimg.com",
+        hostname: "ogosandtypes.com",
         port: "",
         pathname: "/**",
       },
