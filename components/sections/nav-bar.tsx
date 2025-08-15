@@ -34,13 +34,13 @@ const Navbar = () => {
                         <Link href="/" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
                             Home
                         </Link>
-                        <Link href="/listings" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
+                        <Link href="#listings" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
                             Listings
                         </Link>
-                        <Link href="/letsmove" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
+                        <Link href="#letsmove" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
                             Let&apos;s Move
                         </Link>
-                        <Link href="/about" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
+                        <Link href="#about" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
                             About Us
                         </Link>
 
@@ -104,21 +104,21 @@ const Navbar = () => {
                                 Home
                             </Link>
                             <Link
-                                href="/listings"
+                                href="#listings"
                                 className="block px-3 py-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Listings
                             </Link>
                             <Link
-                                href="/letsmove"
+                                href="#letsmove"
                                 className="block px-3 py-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Let&apos;s Move
                             </Link>
                             <Link
-                                href="/about"
+                                href="#about"
                                 className="block px-3 py-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >

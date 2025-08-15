@@ -42,7 +42,7 @@ export default function ContactPage() {
     const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.692944932576!2d-116.0036824!3d36.2088493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8a1a6b3c4b1b5%3A0x9e5e3a9b3c4b1b5!2s3190%20NV-160%2C%20Pahrump%2C%20NV%2089048%2C%20USA!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s";
 
     return (
-        <div className="relative min-h-screen max-w-9xl mx-auto px-4">
+        <section id='contact' className="relative min-h-screen max-w-9xl mx-auto px-4">
             {/* Full-page Google Map Background */}
             <div className="absolute inset-0 z-0">
                 <iframe
@@ -153,6 +153,6 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

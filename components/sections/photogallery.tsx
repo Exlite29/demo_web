@@ -7,6 +7,7 @@ import Image from 'next/image';
 export default function GalleryPage() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<number | null>(null);
+    const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
     // Sample gallery images (replace with your actual images)
     const galleryImages = [
@@ -34,6 +35,49 @@ export default function GalleryPage() {
     const openModal = (id: number) => setSelectedImage(id);
     const closeModal = () => setSelectedImage(null);
 
+    const handleImageError = (imageId: number) => {
+        setImageErrors(prev => new Set([...prev, imageId]));
+        console.log(`Failed to load image with ID: ${imageId}`);
+    };
+
+    // Component for handling image with fallback
+    const ImageWithFallback = ({ image, className, fill = false, sizes, onClick }: {
+        image: typeof galleryImages[0];
+        className?: string;
+        fill?: boolean;
+        sizes?: string;
+        onClick?: () => void;
+    }) => {
+        if (imageErrors.has(image.id)) {
+            return (
+                <div className={`bg-gray-200 flex items-center justify-center ${className}`} onClick={onClick}>
+                    <div className="text-gray-500 text-center p-4">
+                        <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p className="text-sm">Image not available</p>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <Image
+                src={image.src}
+                alt={image.alt}
+                fill={fill}
+                width={!fill ? image.width : undefined}
+                height={!fill ? image.height : undefined}
+                className={className}
+                sizes={sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
+                unoptimized
+                onError={() => handleImageError(image.id)}
+                onClick={onClick}
+                priority={image.id <= 2} // Prioritize first 2 images
+            />
+        );
+    };
+
     return (
         <div className='w-full'>
             <Head>
@@ -54,28 +98,24 @@ export default function GalleryPage() {
                     </div>
 
                     {/* Carousel Container */}
-                    <div className="relative w-full h-96 sm:h-[500px] overflow-hidden rounded-lg shadow-xl">
+                    <div className="relative w-full h-96 sm:h-[500px] overflow-hidden rounded-lg shadow-xl bg-gray-100">
                         {/* Carousel Slides */}
                         <div
-                            className="flex transition-transform duration-500 ease-in-out"
+                            className="flex transition-transform duration-500 ease-in-out h-full"
                             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                         >
                             {galleryImages.map((image) => (
                                 <div
                                     key={image.id}
-                                    className="w-full flex-shrink-0"
+                                    className="w-full flex-shrink-0 h-full relative"
                                     onClick={() => openModal(image.id)}
                                 >
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            fill
-                                            className="object-cover cursor-pointer"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            unoptimized
-                                        />
-                                    </div>
+                                    <ImageWithFallback
+                                        image={image}
+                                        fill
+                                        className="object-cover cursor-pointer"
+                                        onClick={() => openModal(image.id)}
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -83,7 +123,8 @@ export default function GalleryPage() {
                         {/* Navigation Arrows */}
                         <button
                             onClick={prevSlide}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors z-10"
+                            aria-label="Previous image"
                         >
                             <svg
                                 className="w-6 h-6"
@@ -96,7 +137,8 @@ export default function GalleryPage() {
                         </button>
                         <button
                             onClick={nextSlide}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors z-10"
+                            aria-label="Next image"
                         >
                             <svg
                                 className="w-6 h-6"
@@ -109,13 +151,14 @@ export default function GalleryPage() {
                         </button>
 
                         {/* Indicators */}
-                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
                             {galleryImages.map((_, index) => (
                                 <button
                                     key={index}
                                     onClick={() => setCurrentIndex(index)}
                                     className={`w-3 h-3 rounded-full transition-colors ${index === currentIndex ? 'bg-white' : 'bg-white/50'
                                         }`}
+                                    aria-label={`Go to slide ${index + 1}`}
                                 />
                             ))}
                         </div>
@@ -126,14 +169,13 @@ export default function GalleryPage() {
                         {galleryImages.map((image, index) => (
                             <div
                                 key={image.id}
-                                className={`cursor-pointer border-2 transition-all ${index === currentIndex ? 'border-blue-500' : 'border-transparent'
+                                className={`cursor-pointer border-2 transition-all rounded-lg overflow-hidden ${index === currentIndex ? 'border-blue-500' : 'border-transparent'
                                     }`}
                                 onClick={() => setCurrentIndex(index)}
                             >
-                                <div className="relative w-full h-20">
-                                    <Image
-                                        src={image.src}
-                                        alt={image.alt}
+                                <div className="relative w-full h-20 bg-gray-100">
+                                    <ImageWithFallback
+                                        image={image}
                                         fill
                                         className="object-cover"
                                         sizes="100px"
@@ -145,11 +187,15 @@ export default function GalleryPage() {
 
                     {/* Image Modal */}
                     {selectedImage && (
-                        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4" onClick={closeModal}>
+                        <div
+                            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+                            onClick={closeModal}
+                        >
                             <div className="relative w-full h-full max-w-6xl max-h-screen">
                                 <button
                                     onClick={closeModal}
                                     className="absolute top-4 right-4 text-white hover:text-gray-300 focus:outline-none z-10 bg-black/50 rounded-full p-2"
+                                    aria-label="Close modal"
                                 >
                                     <svg
                                         className="w-8 h-8"
@@ -165,15 +211,22 @@ export default function GalleryPage() {
                                         />
                                     </svg>
                                 </button>
-                                <div className="flex justify-center items-center w-full h-full p-4">
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={galleryImages.find(img => img.id === selectedImage)?.src || ''}
-                                            alt="Enlarged view"
-                                            fill
-                                            className="object-contain"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        />
+                                <div
+                                    className="flex justify-center items-center w-full h-full p-4"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <div className="relative w-full h-full bg-gray-100 rounded-lg overflow-hidden">
+                                        {(() => {
+                                            const modalImage = galleryImages.find(img => img.id === selectedImage);
+                                            return modalImage ? (
+                                                <ImageWithFallback
+                                                    image={modalImage}
+                                                    fill
+                                                    className="object-contain"
+                                                    sizes="100vw"
+                                                />
+                                            ) : null;
+                                        })()}
                                     </div>
                                 </div>
                             </div>
