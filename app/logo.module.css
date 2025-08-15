@@ -1,0 +1,45 @@
+.logoSection {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 10%;
+}
+
+.logoContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1);
+}
+
+@media (max-width: 640px) {
+  .logoContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .logoWrapper {
+    padding: 0.5rem;
+  }
+}
