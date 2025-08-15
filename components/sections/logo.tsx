@@ -10,7 +10,7 @@ const LogoSection = () => {
         { src: 'https://ww1.prweb.com/prfiles/2016/08/12/13614323/PVCC-Logo-Transp%20copy.png?p=publish', alt: 'Logo 4', width: 150, height: 50 },
     ];
 
-    // Properly typed variants
+    // Animation variants
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
@@ -40,10 +40,10 @@ const LogoSection = () => {
     };
 
     return (
-        <section className={`${styles.logoSection} `}>
-            <div className="container mx-auto px-4 grayscale-0 " >
+        <section className={`${styles.logoSection} bg-white py-12`}>
+            <div className="container mx-auto px-4">
                 <motion.div
-                    className={styles.logoContainer}
+                    className={`${styles.logoContainer} bg-white p-6 rounded-lg shadow-sm`}
                     initial="hidden"
                     whileInView="visible"
                     variants={containerVariants}
@@ -52,7 +52,7 @@ const LogoSection = () => {
                     {logos.map((logo, index) => (
                         <motion.div
                             key={index}
-                            className={`${styles.logoWrapper} flex`}
+                            className={`${styles.logoWrapper} flex bg-white p-4 rounded-md shadow-sm`}
                             variants={itemVariants}
                             whileHover="hover"
                         >
