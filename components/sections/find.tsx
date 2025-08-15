@@ -28,7 +28,7 @@ const Find: React.FC = () => {
     };
 
     return (
-        <div className={styles.searchContainer}>
+        <section id='letsmove' className={styles.searchContainer}>
             <motion.h1
                 className={styles.title}
                 initial={{ opacity: 0, y: -20 }}
@@ -189,7 +189,7 @@ const Find: React.FC = () => {
 
                 </motion.button>
             </motion.div>
-        </div>
+        </section>
     );
 };
 

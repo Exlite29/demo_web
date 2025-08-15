@@ -51,7 +51,7 @@ const Services = () => {
     ];
 
     return (
-        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div id='about' className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className="max-w-4xl mx-auto">
                 <motion.h1
                     className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"

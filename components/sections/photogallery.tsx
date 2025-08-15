@@ -79,7 +79,7 @@ export default function GalleryPage() {
     };
 
     return (
-        <div className='w-full'>
+        <section id='listings' className='w-full'>
             <Head>
                 <title>Photo Gallery | Marci Metzger Homes</title>
                 <meta name="description" content="View our beautiful property gallery" />
@@ -234,6 +234,6 @@ export default function GalleryPage() {
                     )}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

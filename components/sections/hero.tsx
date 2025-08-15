@@ -84,7 +84,7 @@ const Hero = () => {
     };
 
     return (
-        <section ref={ref} className="relative flex items-center py-20 md:py-2 overflow-hidden">
+        <section id='/' ref={ref} className="relative flex items-center py-20 md:py-2 overflow-hidden">
             <div className="container mx-auto px-4">
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 items-center"
