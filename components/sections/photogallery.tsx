@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 
 export default function GalleryPage() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,13 +10,13 @@ export default function GalleryPage() {
 
     // Sample gallery images (replace with your actual images)
     const galleryImages = [
-        { id: 1, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-50.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Property exterior' },
-        { id: 2, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-14.jpg-SMALL.JPG/:/cr=t:0%25,l:0.05%25,w:99.9%25,h:99.9%25/rs=w:984,h:655', alt: 'Living room' },
-        { id: 3, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-45.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Modern kitchen' },
-        { id: 4, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4460%20Roseworthy-52.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Master bedroom' },
-        { id: 5, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-54.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Bathroom' },
-        { id: 6, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-41.jpg-SMALL.JPG/:/rs=w:984,h:656', alt: 'Backyard' },
-        { id: 7, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-53.jpg-SMALL.JPG/:/rs=w:984,h:656', alt: 'Swimming pool' },
+        { id: 1, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-50.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Property exterior', width: 984, height: 655 },
+        { id: 2, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-14.jpg-SMALL.JPG/:/cr=t:0%25,l:0.05%25,w:99.9%25,h:99.9%25/rs=w:984,h:655', alt: 'Living room', width: 984, height: 655 },
+        { id: 3, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-45.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Modern kitchen', width: 984, height: 655 },
+        { id: 4, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4460%20Roseworthy-52.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Master bedroom', width: 984, height: 655 },
+        { id: 5, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-54.jpg-SMALL.JPG/:/rs=w:984,h:655', alt: 'Bathroom', width: 984, height: 655 },
+        { id: 6, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-41.jpg-SMALL.JPG/:/rs=w:984,h:656', alt: 'Backyard', width: 984, height: 656 },
+        { id: 7, src: 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-53.jpg-SMALL.JPG/:/rs=w:984,h:656', alt: 'Swimming pool', width: 984, height: 656 },
     ];
 
     const nextSlide = () => {
@@ -65,11 +66,15 @@ export default function GalleryPage() {
                                     className="w-full flex-shrink-0"
                                     onClick={() => openModal(image.id)}
                                 >
-                                    <img
-                                        src={image.src}
-                                        alt={image.alt}
-                                        className="w-full h-full object-cover cursor-pointer"
-                                    />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            fill
+                                            className="object-cover cursor-pointer"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -124,11 +129,15 @@ export default function GalleryPage() {
                                     }`}
                                 onClick={() => setCurrentIndex(index)}
                             >
-                                <img
-                                    src={image.src}
-                                    alt={image.alt}
-                                    className="w-full h-20 object-cover"
-                                />
+                                <div className="relative w-full h-20">
+                                    <Image
+                                        src={image.src}
+                                        alt={image.alt}
+                                        fill
+                                        className="object-cover"
+                                        sizes="100px"
+                                    />
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -156,11 +165,15 @@ export default function GalleryPage() {
                                     </svg>
                                 </button>
                                 <div className="flex justify-center items-center w-full h-full p-4">
-                                    <img
-                                        src={galleryImages.find(img => img.id === selectedImage)?.src || ''}
-                                        alt="Enlarged view"
-                                        className="max-w-full max-h-full object-contain"
-                                    />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={galleryImages.find(img => img.id === selectedImage)?.src || ''}
+                                            alt="Enlarged view"
+                                            fill
+                                            className="object-contain"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

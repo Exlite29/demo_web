@@ -38,7 +38,7 @@ const Navbar = () => {
                             Listings
                         </Link>
                         <Link href="/letsmove" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
-                            Let's Move
+                            Let&apos;s Move
                         </Link>
                         <Link href="/about" className="text-gray-800 hover:text-gray-600 transition-colors font-medium">
                             About Us
@@ -115,7 +115,7 @@ const Navbar = () => {
                                 className="block px-3 py-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Let's Move
+                                Let&apos;s Move
                             </Link>
                             <Link
                                 href="/about"
