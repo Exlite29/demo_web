@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
+
   images: {
     remotePatterns: [
       {
@@ -29,6 +30,7 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+    domains: ["img1.wsimg.com"],
   },
 };
 

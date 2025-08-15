@@ -46,7 +46,7 @@ export default function GalleryPage() {
                     {/* Page Header - Centered */}
                     <div className="text-center mb-12">
                         <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                            Property Gallery
+                            Photo Gallery
                         </h1>
                         <p className="mt-4 text-lg text-gray-600">
                             Explore our beautiful properties
@@ -73,6 +73,7 @@ export default function GalleryPage() {
                                             fill
                                             className="object-cover cursor-pointer"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            unoptimized
                                         />
                                     </div>
                                 </div>
