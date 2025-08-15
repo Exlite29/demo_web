@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 
 const Hero = () => {
     const controls = useAnimation();
@@ -85,6 +86,18 @@ const Hero = () => {
 
     return (
         <section id='/' ref={ref} className="relative flex items-center py-20 md:py-2 overflow-hidden">
+            <div className="absolute inset-0 -z-10">
+                <Image
+                    src="https://alltopstartups.com/wp-content/uploads/2021/03/How-to-Afford-Your-Dream-Home.png" // Update with your image path
+                    alt="Background"
+                    fill
+                    className="object-cover"
+                    quality={100}
+                    priority
+                />
+                {/* Optional overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/20"></div>
+            </div>
             <div className="container mx-auto px-4">
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40 items-center"
@@ -102,7 +115,7 @@ const Hero = () => {
                             variants={floatingVariants}
                             animate="float"
                         >
-                            <div className="absolute inset-0 rounded-full overflow-hidden border-8 border-white shadow-xl">
+                            <div className="absolute inset-0 rounded-full overflow-hidden border-8 border-white shadow-xl scale-70">
                                 <motion.img
                                     src="https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/photo-5db79f9.jpg/:/cr=t:14.65%25,l:0%25,w:100%25,h:66.64%25/rs=w:730,h:730,cg:true"
                                     alt="Hero"
@@ -144,7 +157,7 @@ const Hero = () => {
                         className="flex justify-center order-2 md:order-none"
                         variants={textVariants}
                     >
-                        <div className="text-center bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-md space-y-4 md:space-y-6 backdrop-blur-sm bg-opacity-90">
+                        <div className="text-center glass p-6 md:p-8 rounded-xl shadow-lg w-full max-w-md space-y-4 md:space-y-6  ">
                             <motion.h2
                                 className="text-2xl md:text-3xl font-bold text-gray-800"
                                 variants={textVariants}
@@ -153,7 +166,7 @@ const Hero = () => {
                             </motion.h2>
 
                             <motion.p
-                                className="text-gray-600 md:text-lg"
+                                className="text-black md:text-lg"
                                 variants={textVariants}
                             >
                                 Realtor for 3 decades!
@@ -176,12 +189,7 @@ const Hero = () => {
                                 Call Now
                             </motion.button>
 
-                            <motion.p
-                                className="text-xs md:text-sm text-gray-500 mt-2 md:mt-4"
-                                variants={textVariants}
-                            >
-                                Or send us an email at: contact@example.com
-                            </motion.p>
+
                         </div>
                     </motion.div>
                 </motion.div>

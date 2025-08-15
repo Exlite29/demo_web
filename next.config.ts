@@ -29,6 +29,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "alltopstartups.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
     domains: ["img1.wsimg.com"],
   },
